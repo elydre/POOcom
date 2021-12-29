@@ -23,7 +23,7 @@ client = ClientCom(channel = "channel_name", host = "pf4.ddns.net", port = 63535
 ```
 
 
-## envoie de message
+## envoie de messages
 
 **channel** et le channel dans lequel le message est envoyé ou **True** pour le channel par défaut.
 ```py
@@ -34,10 +34,9 @@ client.send("message")
 client.send(msg = "message", channel = "channel_name")
 ```
 
-## réception de message
+## réception de messages
 
 ### decorateur
-
 pour que la fonction soit appelée lorsque le message est reçu, il faut utiliser le decorateur `on_message`
 ```py
 @client.on_message
