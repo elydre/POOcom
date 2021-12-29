@@ -17,7 +17,7 @@
 import socket
 from _thread import start_new_thread
 
-version = "0.2.1"
+version = "0.2.5"
 
 def recv_msg(s,map, only_channel):
     while True:
