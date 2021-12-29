@@ -36,24 +36,22 @@ client.send(msg = "message", channel = "channel_name")
 
 ## réception de message
 
+### decorateur
+
+pour que la fonction soit appelée lorsque le message est reçu, il faut utiliser le decorateur `on_message`
+```py
+@client.on_message
+```
+
 ### création d'une fonction de reception
+le nom de la fonction doit être `all_channel` pour recevoir tous les messages ou `only_channel` pour recevoir uniquement les messages du channel spécifié a le création du client.
+
 la fonction doit prendre 2 arguments:
 - la channel du message
 - le message
 
 ```py
-def new_msg(channel, msg):
+@client.on_message
+def only_channel(channel, msg):
     print(f"<{channel}> {msg}")
-```
-
-### mapping de la fonction
-
-**map** et la fonction a relier
-**only_channel** et du seul channel qui peut afficher des messages ou **True** pour le channel par défaut et **False** pour tous les channels
-```py
-# simple:
-client.map(new_msg)
-
-# aprofondi:
-client.map(map = new_msg, only_channel = "channel_name")
 ```

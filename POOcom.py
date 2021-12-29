@@ -1,5 +1,23 @@
+'''
+--|~|--|~|--|~|--|~|--|~|--|~|--
+
+██  ████        ██████        ██
+████    ██     ██           ████
+██      ██   ████████     ██  ██
+████████       ██       ██    ██
+██             ██       █████████
+██             ██             ██
+██
+ - codé en : UTF-8
+ - langage : python 3
+ - GitHub  : github.com/pf4-DEV
+--|~|--|~|--|~|--|~|--|~|--|~|--
+'''
+
 import socket
 from _thread import start_new_thread
+
+version = "0.2.5"
 
 def recv_msg(s,map, only_channel):
     while True:
@@ -16,11 +34,17 @@ class ClientCom:
         self.channel = channel
 
     def change_channel(self, channel):
-        self.channel = channel
+        self.channel = channel     
 
-    def map(self, map, only_channel = True):
-        if only_channel: only_channel = self.channel
-        start_new_thread(recv_msg, (self.s, map, only_channel))
+    def on_message(self, fonction):
+        if fonction.__name__ == "only_channel":
+            start_new_thread(recv_msg, (self.s, fonction.__call__ , self.channel))
+        elif fonction.__name__ == "all_channel":
+            start_new_thread(recv_msg, (self.s, fonction.__call__ , False))
+        else:
+            print(f"[POOcom] Erreur : nom de fonction invalide -> '{fonction.__name__}' (only_channel/all_channel)")
+        return fonction
+    
 
     def send(self, msg, channel = True):
         if str(channel) == "True": channel = self.channel
