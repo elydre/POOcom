@@ -4,8 +4,8 @@ from POOcom import ClientCom
 client = ClientCom(channel="test")
 
 # on définit une fonction qui sera appelée lorsqu'on reçoit un message
-@client.on_message
-def all_channel(channel, msg):
+@client.on_message(only_channel=False)
+def new(channel, msg):
     print(f"<{channel}> {msg}")
 
 print("channel <entrer>\nmessage <entrer>")

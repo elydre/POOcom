@@ -5,7 +5,7 @@ client = ClientCom(channel="test")
 
 # on définit une fonction qui sera appelée lorsqu'on reçoit un message
 @client.on_message
-def only_channel(channel, msg):
+def new(channel, msg):
     print(f"<{channel}> {msg}")
 
 while True:

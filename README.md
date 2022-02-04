@@ -43,14 +43,14 @@ pour que la fonction soit appelée lorsque le message est reçu, il faut utilise
 ```
 
 ### création d'une fonction de reception
-le nom de la fonction doit être `all_channel` pour recevoir tous les messages ou `only_channel` pour recevoir uniquement les messages du channel spécifié a le création du client.
+le decorateur `on_message` peux prendre `only_channel` (bool) pour ne recevoir que les messages dans le channel spécifié.
 
 la fonction doit prendre 2 arguments:
 - la channel du message
 - le message
 
 ```py
-@client.on_message
+@client.on_message(only_channel=False)
 def only_channel(channel, msg):
     print(f"<{channel}> {msg}")
 ```

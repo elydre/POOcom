@@ -36,15 +36,14 @@ class ClientCom:
     def change_channel(self, channel):
         self.channel = channel     
 
-    def on_message(self, fonction):
-        if fonction.__name__ == "only_channel":
-            start_new_thread(recv_msg, (self.s, fonction.__call__ , self.channel))
-        elif fonction.__name__ == "all_channel":
-            start_new_thread(recv_msg, (self.s, fonction.__call__ , False))
-        else:
-            print(f"[POOcom] Erreur : nom de fonction invalide -> '{fonction.__name__}' (only_channel/all_channel)")
-        return fonction
-    
+    def on_message(self, **kwargs):
+        def call(fonction):
+            if not kwargs["only_channel"]:
+                start_new_thread(recv_msg, (self.s, fonction.__call__ , False))
+            else:
+                start_new_thread(recv_msg, (self.s, fonction.__call__ , self.channel))
+            return fonction
+        return call
 
     def send(self, msg, channel = True):
         if str(channel) == "True": channel = self.channel
