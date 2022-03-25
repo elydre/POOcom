@@ -16,22 +16,16 @@ from POOcom import ClientCom
 ## création du client
 ```py
 # simple:
-client = ClientCom("channel_name")
+client = ClientCom()
 
 # aprofondi:
-client = ClientCom(channel = "channel_name", host = "pf4.ddns.net", port = 63535)
+client = ClientCom(host = "pf4.ddns.net", port = 63535)
 ```
-
 
 ## envoie de messages
 
-**channel** et le channel dans lequel le message est envoyé ou **True** pour le channel par défaut.
 ```py
-# simple:
 client.send("message")
-
-# aprofondi:
-client.send(msg = "message", channel = "channel_name")
 ```
 
 ## réception de messages
@@ -43,14 +37,11 @@ pour que la fonction soit appelée lorsque le message est reçu, il faut utilise
 ```
 
 ### création d'une fonction de reception
-le decorateur `on_message` peux prendre `only_channel` (bool) pour ne recevoir que les messages dans le channel spécifié.
 
-la fonction doit prendre 2 arguments:
-- la channel du message
-- le message
+la fonction doit prendre en argument le message reçu:
 
 ```py
-@client.on_message(only_channel=False)
-def only_channel(channel, msg):
-    print(f"<{channel}> {msg}")
+@client.on_message
+def only_channel(msg):
+    print(f"-> {msg}")
 ```
