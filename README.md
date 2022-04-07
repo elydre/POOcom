@@ -25,7 +25,7 @@ client = ClientCom(host = "pf4.ddns.net", port = 63535)
 ## envoie de messages
 
 ```py
-client.send("message")
+client.send("As-tu déjà dansé avec le diable au clair de lune ?")
 ```
 
 ## réception de messages
