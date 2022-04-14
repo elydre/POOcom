@@ -4,7 +4,7 @@ com-server est une platforme de communication client-serveur avec serveur pré-h
 
 ## Installation
 
-Télécharger POOcom.py et placez le dans le dossier de votre projet.
+Téléchargez POOcom.py et placez le dans le dossier de votre projet.
 
 # Usage
 
