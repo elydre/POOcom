@@ -4,7 +4,7 @@ from POOcom import ClientCom
 client = ClientCom()
 
 # on définit une fonction qui sera
-# appelée lorsqu'on reçoit un message
+# appelée qu'un message est reçu
 @client.on_message
 def new(msg):
     print(f"-> {msg}")
