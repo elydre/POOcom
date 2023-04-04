@@ -2,6 +2,7 @@
 from POOcom import ClientCom
 
 client = ClientCom()
+print("init done!")
 
 # on définit une fonction qui sera
 # appelée qu'un message est reçu

@@ -21,6 +21,9 @@ import json
 HOST = "192.168.1.100"
 PORT = 63535
 
+WEBHOOK_URL = "webhooks url"  # change this
+USE_WEBHOOK = False
+
 liste_conn = []
 ban = []
 
@@ -29,15 +32,14 @@ stat = {
     "msg_recv": 0,
 }
 
-
 dis_print = lambda msg: urlopen(Request(
-            "webhooks url",                 # change this
+            WEBHOOK_URL,
             data=json.dumps({
                 'content': msg}).encode(),
             headers={
                 'Content-Type': 'application/json',
                 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
-            }))
+            })) if USE_WEBHOOK else print(msg)
 
 def send_print():
     while True:
@@ -59,7 +61,6 @@ def send_print():
 
 def send_all(data):
     stat['msg_recv'] += 1
-    print(data)
     for conn in liste_conn:
         stat['msg_send'] += 1
         conn[0].sendall(data.encode())
@@ -75,10 +76,10 @@ def echange(conn, addr):
         liste_conn.append([conn, addr])
         while True:
             try:
-                data = conn.recv(1024)
-                if not data:
+                if data := conn.recv(1024):
+                    send_all(data.decode())
+                else:
                     break
-                send_all(data.decode())
             except Exception:
                 conn.close()
                 break
